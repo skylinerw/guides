@@ -1005,7 +1005,7 @@ The following will trigger once the player eventually visits both the "desert" a
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="nether_travel">`nether_travel`</a>
 
-This triggers every second (every 20 ticks) at all times, essentially requiring the use of conditions despite them being optional for this trigger. However, this activation can be useful if needing pre-finished advancements. The following will always activate every second.
+This triggers when the player travels to the Nether and then returns to the Overworld.
 
 ```json
 {
@@ -1389,7 +1389,7 @@ There are 0 optional conditions for this trigger.
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="slept_in_bed">`slept_in_bed`</a>
 
-This triggers when the player successfully sleeps in a bed. If the bed explodes, such as from trying to sleep in the nether, this will not trigger.
+This triggers when the player successfully enters a bed (the player does not have to pass the night). For example if the bed explodes, such as from trying to sleep in the nether, this will not trigger.
 
 ```json
 {
