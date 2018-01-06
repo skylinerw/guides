@@ -479,8 +479,8 @@ To work around that, you would specify the metadata value. The following ensures
     {
         "item": "minecraft:diamond_sword",
         "data": 0
-    ]
-}
+    }
+]
 ```
 
 ### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="results">Results</a>
