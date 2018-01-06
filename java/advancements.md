@@ -689,7 +689,7 @@ And combining it with an ID, the following checks if the player has Sharpness 5.
 "item_object": {
     "enchantments": [
         {
-            "enchantment": "minecraft:sharpness"
+            "enchantment": "minecraft:sharpness",
             "levels": 5
         }
     ]
