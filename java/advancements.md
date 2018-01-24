@@ -710,7 +710,7 @@ The `nbt` string compares the raw NBT input to the item's NBT data. This raw dat
 
 An entity object contains a handful of data to compare to an incoming entity. All options are available anywhere that this entity object is used.
 
-### . `type`
+### 1. `type`
 
 The `type` string specifies the entity ID to match against. For example, the following checks if the incoming entity is a creeper.
 
