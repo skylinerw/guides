@@ -791,8 +791,7 @@ The `items` [item object](https://github.com/skylinerw/guides/blob/master/java/a
             "conditions": {
                 "items": [
                     {
-                        "item": "minecraft:stone",
-                        "data": 0
+                        "item": "minecraft:stone"
                     },
                     {
                         "item": "minecraft:dirt"
