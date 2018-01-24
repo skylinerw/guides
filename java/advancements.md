@@ -1,6 +1,6 @@
 # Advancements
 
-*Last updated: 1.12*
+*Last updated: 18w03b*
 
 ***
 
@@ -109,13 +109,15 @@ com.google.gson.JsonSyntaxException: Missing description
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="files-location">File location</a>
 
-Advancements are saved within the world folder to be distributed with the world itself, inside the `/data/advancements/` folder. Here is an example structure within the world folder, where "New World" is the name of the world folder:
+Advancements are saved as a datapack in the world folder to be distributed with the world itself, inside the `/datapacks/` folder. Here is an example structure within the world folder, where "New World" is the name of the world folder:
 
-![](http://skylinerw.com/images/advancements/files_1.png)
+![](http://skylinerw.com/images/advancements/files_2.png)
+
+For more information on setting up a data pack (including the creation of the required `pack.meta` file), see [here](https://minecraft.gamepedia.com/Data_pack).
 
 ### <a name="files-location-namespaces">Namespaces</a>
 
-The root folder that you create within the `/advancements/` folder will be referred to as the "namespace". This is what separates collections of advancements, such as for different mods or maps. **File/folder names must all be lowercase to circumvent issues with differing operating system file structures.**
+The root folder that you create within the `/New World/datapacks/<datapack name>/data/` folder will be referred to as the "namespace". This is what separates collections of advancements, such as for different mods or maps. **File/folder names must all be lowercase to circumvent issues with differing operating system file structures.**
 
 From the image example above, `skylinerwadvancements`, `anothermod`, and `minecraft` are the namespaces.
 
@@ -129,7 +131,7 @@ When referencing an advancement, whether it's from a [parent](#tree-root) or in 
 [namespace]:[filepath/to/advancement]
 ```
 
-Example, targeting the file `/data/advancements/anothermod/challenges/kill_creepers.json`:
+Example, targeting the file `/New World/datapacks/<datapack name>/data/anothermod/advancements/challenges/kill_creepers.json`:
 
 ```
 anothermod:challenges/kill_creepers
@@ -145,7 +147,7 @@ story/elytra = minecraft:story/elytra
 
 You can create an advancement within the `minecraft` namespace with the same name as a default advancement. Anything that uses the default advancement will then use your custom one.
 
-For example, given the filepath `/data/advancements/minecraft/story/elytra.json`, the following advancement will replace the default advancement that triggers by having any elytra in the inventory, and instead triggers by having an elytra slightly damaged in the inventory (which can trigger when starting to fly):
+For example, given the filepath `/New World/datapacks/<datapack name>/minecraft/advancements/story/elytra.json`, the following advancement will replace the default advancement that triggers by having any elytra in the inventory, and instead triggers by having an elytra slightly damaged in the inventory (which can trigger when starting to fly):
 
 ```json
 {
@@ -163,7 +165,7 @@ For example, given the filepath `/data/advancements/minecraft/story/elytra.json`
                 "items": [
                     {
                         "item": "minecraft:elytra",
-                        "data": 1
+                        "durability": 431
                     }
                 ]
             }
@@ -247,10 +249,9 @@ The following is a list of all possible keys for advancements.
                 "items": [
                     {
                         "item": "minecraft:stone",
+                        "tag": "minecraft:doors",
                         "count": 1,
                         "count": {"min":1,"max":1},
-                        "data": 1,
-                        "data": {"min":1,"max":1},
                         "durability": 1,
                         "durability": {"min":1,"max":1},
                         "potion": "minecraft:invisibility",
@@ -265,10 +266,9 @@ The following is a list of all possible keys for advancements.
                 ],
                 "item": {
                     "item": "minecraft:stone",
+                    "tag": "minecraft:doors",
                     "count": 1,
                     "count": {"min":1,"max":1},
-                    "data": 1,
-                    "data": {"min":1,"max":1},
                     "durability": 1,
                     "durability": {"min":1,"max":1},
                     "potion": "minecraft:invisibility",
@@ -382,8 +382,7 @@ The following is a list of all possible keys for advancements.
     "parent": "namespace:path/to/parent_advancement",
     "display": {
         "icon": {
-            "item": "minecraft:stone_pickaxe",
-            "data": 0
+            "item": "minecraft:stone_pickaxe"
         },
         "title": "Display title",
         "description": "Display description",
@@ -472,7 +471,7 @@ The `feature` string specifies the name ID of a structure. The player must be st
 }
 ```
 
-### 3. `dimension`
+### 4. `dimension`
 
 The `dimension` string specifies the name ID of a dimension to find the player in. Accepted values are "overworld", "the_nether", and "the_end". The following checks if the player is anywhere in the nether.
 
@@ -582,7 +581,9 @@ The `visible` boolean checks if the effect has the "visible" flag set to true.
 
 An item object contains a handful of data to compare to an incoming item stack. All options are available anywhere that this item object is used.
 
-### . `item`
+### 1. `item`, `tag`
+
+**You cannot use both `item` and `tag` together.**
 
 The `item` string specifies a base item ID to compare the item to. The following checks if the item is redstone.
 
@@ -592,20 +593,17 @@ The `item` string specifies a base item ID to compare the item to. The following
 }
 ```
 
-### 2. `data`
-
-The `data` integer specifies a metadata of the item. The following checks if the item is a polished granite block.
+The `tag` string instead specifies the resource location to an ID group, minus the designating `#` character. These groups are a list of item IDs that the incoming item can match any one of. Default groups for items include: "#minecraft:wool", "#minecraft:planks", "#minecraft:stone_bricks", "#minecraft:wooden_buttons", "#minecraft:buttons", "#minecraft:carpets", "#minecraft:wooden_doors", "#minecraft:doors", "#minecraft:saplings", and "#minecraft:logs". Adding custom groups requires the use of [data packs](https://minecraft.gamepedia.com/Data_pack). The following checks if the item matches any of the IDs in the "minecraft:doors" group (which checks both the "#minecraft:wooden_doors" group as well as the "minecraft:iron_door" item ID).
 
 ```json
 "item_object": {
-    "item": "minecraft:stone",
-    "data": 2
+    "tag": "minecraft:doors"
 }
 ```
 
-### 3. `durability`
+### 2. `durability`
 
-The `data` [range](#generic-range) specifies the remaining durability of an item. The following checks if the item has 400 or more durability remaining.
+The `durability` [range](#generic-range) specifies the remaining durability of an item. The following checks if the item has 400 or more durability remaining.
 
 ```json
 "item_object": {
@@ -615,7 +613,7 @@ The `data` [range](#generic-range) specifies the remaining durability of an item
 }
 ```
 
-### 4. `count`
+### 3. `count`
 
 The `count` [range](#generic-range) specifies the number of items **in a single stack**. This cannot be used to check the number of items across the inventory as a whole. The following checks if the item has 16 or more in its stack.
 
@@ -627,7 +625,7 @@ The `count` [range](#generic-range) specifies the number of items **in a single 
 }
 ```
 
-### 5. `potion`
+### 4. `potion`
 
 The `potion` string specifies the default brewed potion ID that the item must contain, specified in the `Potion` NBT string. The wiki contains a list of those IDs [here](https://minecraft.gamepedia.com/Potion#Item_data).
 
@@ -643,7 +641,7 @@ The `potion` string specifies the default brewed potion ID that the item must co
 /give @p minecraft:stone 1 0 {Potion:"minecraft:invisibility"}
 ```
 
-### 6. `enchantments`
+### 5. `enchantments`
 
 The `enchantments` list checks the item's enchantments (whether in the `ench` NBT list for all items excluding books, or the `StoredEnchantments` NBT list for only books) for matching data. If only an empty object is specified, the player's inventory is checked for **any** enchanted items.
 
@@ -696,7 +694,7 @@ And combining it with an ID, the following checks if the player has Sharpness 5.
 }
 ```
 
-### 7. `nbt`
+### 6. `nbt`
 
 The `nbt` string compares the raw NBT input to the item's NBT data. This raw data starts within the `tag` compound of the item format and must be surrounded by curly brackets. The following checks if the item has a specific display name.
 
@@ -762,7 +760,7 @@ The `effects` [status effects object](#generic-effects) checks data concerning t
 
 ### 5. `nbt`
 
-The `nbt` string compares the raw NBT input to the entity's NBT data. This raw data starts within the root of the entity format and must be surrounded by curly brackets. The following checks if the entity has a specific tag within its `Tags` list.
+The `nbt` string compares the raw NBT input to the entity's NBT data. This raw data starts within the root of the entity format and must be surrounded by curly brackets. If the entity being checked is a player, the `SelectedItem` compound (containing the player's mainhand item) will be appended to the player's NBT before comparing to the provided input. The following checks if the entity has a specific tag within its `Tags` list.
 
 ```json
 "entity_object": {
@@ -1243,7 +1241,7 @@ Given the following advancement, which uses a simple string for the description:
                 "items": [
                     {
                         "item": "minecraft:elytra",
-                        "data": 1
+                        "durability": 431
                     }
                 ]
             }
@@ -1275,7 +1273,7 @@ Or you can specify formatting for the text using the text component (note that m
                 "items": [
                     {
                         "item": "minecraft:elytra",
-                        "data": 1
+                        "durability": 431
                     }
                 ]
             }
@@ -1290,14 +1288,15 @@ This will display as:
 
 #### 3. `icon`
 
-The `icon` object holds a required item ID and an optional metadata value of the item. This icon is shown in the "Advancements" menu, as well as in the popup notification when completing the advancement. The following icon specifies red wool
+The `icon` object holds a required item ID of the item. This icon is shown in the "Advancements" menu, as well as in the popup notification when completing the advancement. The following icon specifies red wool:
 
 ```json
 "icon": {
-    "item": "minecraft:wool",
-    "data": 14
+    "item": "minecraft:red_wool"
 }
 ```
+
+Currently you may not specify any NBT data for the item, including durability.
 
 ### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-background">Background</a>
 
