@@ -176,7 +176,7 @@ For example, given the filepath `/New World/datapacks/<datapack name>/minecraft/
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="files-editing">Editing</a>
 
-You will need to use a UTF-8 compliant text editor when creating and saving loot tables that use unicode characters (such as the section symbol). By not encoding in UTF-8, special characters may not be saved correctly and Minecraft may fail to parse the data.
+You will need to use a UTF-8 compliant text editor when creating and saving advancements that use unicode characters (such as the section symbol). By not encoding in UTF-8, special characters may not be saved correctly and Minecraft may fail to parse the data.
 
 **File/folder names must all be lowercase to circumvent issues with differing operating system file structures.**
 
