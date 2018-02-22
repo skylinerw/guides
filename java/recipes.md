@@ -1,6 +1,6 @@
 # Custom Recipes
 
-*Last updated: 18w05a*
+*Last updated: 18w08a*
 
 ***
 
@@ -13,37 +13,43 @@
 1. [Intro](#intro)
 2. [JSON structure](#structure)
 3. [Shared: item element](#generic-item)
-   1. [List of objects](#generic-item-list)
+    1. [List of objects](#generic-item-list)
 
 ## Files
 
-3. [Location](#files-location)
+4. [Location](#files-location)
     1. [Namespaces](#files-location-namespaces)
-4. [Referencing](#files-referencing)
-5. [Replacing default recipes](#default-recipes)
+5. [Referencing](#files-referencing)
+6. [Replacing default recipes](#default-recipes)
     1. [List of default recipes](https://minecraft.gamepedia.com/Crafting#Complete_recipe_list)
-6. [Editing](#files-editing)
+7. [Editing](#files-editing)
 
 ## Customizing recipes
 
-4. [Type](#type)
-5. [Groups](#groups)
-6. [Shaped crafting](#shaped-crafting)
-   1. [Patterns](#shaped-patterns)
-   2. [Keys](#shaped-keys)
-7. [Shapeless crafting](#shapeless-crafting)
-   1. [Ingredients](#shapeless-ingredients)
-8. [Results](#results)
+8. [Type](#type)
+9. [Groups](#groups)
+10. [Shaped crafting](#shaped-crafting)
+    1. [Patterns](#shaped-patterns)
+    2. [Keys](#shaped-keys)
+11. [Shapeless crafting](#shapeless-crafting)
+    1. [Ingredients](#shapeless-ingredients)
+12. [Smelting](#smelting)
+    1. [Ingredient](#smelting-ingredient)
+    2. [Experience](#smelting-experience)
+    3. [Cooking time](#smelting-cookingtime)
+13. [Results](#results)
+    1. [Crafting results](#results-crafting)
+    2. [Smelting results](#results-smelting)
 
 ## Commands
 
-9. [Command: `/recipe`](#command-recipe)
+14. [Command: `/recipe`](#command-recipe)
 
 ## Conclusion
 
-10. [Q&A](#qa)
-11. [External links](#external-links)
-12. [Conclusion](#conclusion)
+15. [Q&A](#qa)
+16. [External links](#external-links)
+17. [Conclusion](#conclusion)
 
 # Generic info
 
@@ -51,7 +57,7 @@
 
 As of 1.12, recipes have become data-driven via external JSON files. This allows map makers, modders, and server owners to modify and add recipes to their liking.
 
-Recipes can be shaped or shapeless, producing a specific item. As of 18w05a, only crafting table recipes are customizable. A new command, [`/recipe`](#command-recipe), has been introduced to supplement the files. Advancements may check if a player [unlocked a recipe](https://github.com/skylinerw/guides/blob/master/java/advancements/triggers.md#recipe_unlocked), or [grant recipes](https://github.com/skylinerw/guides/blob/master/java/advancements.md#rewards-recipes) to players.
+Recipes can be shaped or shapeless, producing a specific item. As of 18w08a, only crafting table recipes and smelting recipes are customizable. A new command, [`/recipe`](#command-recipe), has been introduced to supplement the files. Advancements may check if a player [unlocked a recipe](https://github.com/skylinerw/guides/blob/master/java/advancements/triggers.md#recipe_unlocked) or they can [grant recipes](https://github.com/skylinerw/guides/blob/master/java/advancements.md#rewards-recipes) to players.
 
 Recipes use the [JSON format](http://json.org/) to store the recipe in external files.
 
@@ -64,38 +70,53 @@ The following is a list of all possible keys for recipes.
     "type": "crafting_shaped",
     "group": "group name",
     "pattern": [
-        "##",
-        "##",
+        "## ",
+        "## ",
         "((("
     ],
     "key": {
         "#": {
             "item": "minecraft:stone",
-            "tag": "minecraft:planks"
+            "tag": "minecraft:grass"
         },
         "(": [
             {
                 "item": "minecraft:stone",
-                "tag": "minecraft:planks"
+                "tag": "minecraft:grass"
             }
         ]
     },
     "ingredients": [
         {
             "item": "minecraft:stone",
-            "tag": "minecraft:planks"
+            "tag": "minecraft:grass"
         },
         [
             {
                 "item": "minecraft:stone",
-                "tag": "minecraft:planks"
+                "tag": "minecraft:grass"
             }
         ]
     ],
+    "ingredient": [
+        {
+            "item": "minecraft:stone",
+            "tag": "minecraft:grass"
+        },
+        [
+            {
+                "item": "minecraft:stone",
+                "tag": "minecraft:grass"
+            }
+        ]
+    ],
+    "experience": 0.0,
+    "cookingtime": 200,
     "result": {
         "item": "minecraft:stone",
         "count": 1
-    }
+    },
+    "result": "minecraft:stone"
 }
 ```
 
@@ -115,7 +136,7 @@ The `item` string specifies a base item ID. `item` and `tag` are mutually exclus
 
 **2. "tag"**
 
-The `tag` string specifies the resource location to an ID group, minus the designating `#` character. These groups are a list of item IDs that the incoming item can match any one of. For a list of default item groups, see [Minecraft Wiki: Tag](https://minecraft.gamepedia.com/Tag#Items). Adding custom groups requires the use of [data packs](https://minecraft.gamepedia.com/Data_pack). `item` and `tag` are mutually exclusive. This **cannot** be used in a [result](#result). The following looks for any item listed in the "#minecraft:wool" group.
+The `tag` string specifies the resource location to an ID group, minus the designating `#` character. These groups are a list of item IDs that the incoming item can match any one of. For a list of default item groups, see [Minecraft Wiki: Tag](https://minecraft.gamepedia.com/Tag#Items). Adding custom groups requires the use of [data packs](https://minecraft.gamepedia.com/Data_pack). `item` and `tag` are mutually exclusive. This **cannot** be used in a [result](#results). The following looks for any item listed in the "#minecraft:wool" group.
 
 ```json
 "item_object": {
@@ -125,7 +146,7 @@ The `tag` string specifies the resource location to an ID group, minus the desig
 
 **3. "count"**
 
-The optional `count` number specifies the amount of items in the stack, defaulting to 1 when not specified. This **cannot** be used in a [key](#shaped-keys) or [ingredient](#shapeless-ingredients), only in a [result](#result). The following creates an item with a stacksize of 16.
+The optional `count` number specifies the amount of items in the stack, defaulting to 1 when not specified. This **cannot** be used in a [key](#shaped-keys), [crafting ingredient](#shapeless-ingredients), or [smelting ingredient](#smelting-ingredient), only in a [crafting result](#results-crafting). The following creates an item with a stacksize of 16.
 
 ```json
 "item_object": {
@@ -135,7 +156,7 @@ The optional `count` number specifies the amount of items in the stack, defaulti
 ```
 ## <a name="generic-item-list">List of objects</a>
 
-As a shortcut to using tag groups, an item element can also be a list of item objects, but **only** for [keys](#shaped-keys) and [ingredients](#shapeless-ingredients) (not a [result](#result)). For example, the following will allow crafting with either a stone **or** a stick.
+As an alternative to using tag groups, an item element can also be a list of item objects, but **only** for [keys](#shaped-keys), [crafting ingredients](#shapeless-ingredients), or [smelting ingredients](#smelting-ingredient) (not any [results](#results)). For example, the following will allow an ingredient to either be a stone **or** a stick.
 
 ```json
 [
@@ -311,7 +332,7 @@ Image example:
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="type">Type</a>
 
-A recipe **must** have a type of crafting layout, specified in the `type` string. The value can either be "crafting_shaped" for [shaped crafting](#shaped-crafting) or "crafting_shapeless" for [shapeless crafting](#shapeless-crafting).
+A recipe **must** have a type of crafting layout, specified in the `type` string. The value can either be "crafting_shaped" for [shaped crafting](#shaped-crafting), "crafting_shapeless" for [shapeless crafting](#shapeless-crafting), or "smelting" for [smelting](#smelting).
 
 The following recipe makes use of shaped crafting.
 
@@ -334,7 +355,7 @@ The following recipe makes use of shaped crafting.
 }
 ```
 
-While the following recipe makes use of shapeless crafting.
+The following recipe makes use of shapeless crafting.
 
 ```json
 {
@@ -350,13 +371,25 @@ While the following recipe makes use of shapeless crafting.
 }
 ```
 
+The following recipe makes use of smelting.
+
+```json
+{
+    "type": "smelting",
+    "ingredient": {
+        "item": "minecraft:redstone"
+    },
+    "result": "minecraft:stone"
+}
+```
+
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="groups">Groups</a>
 
-A recipe can optionally have a recipe group it belongs to within the crafting helper interface, specified by the `group` string. The value of this string can be anything. Any recipes that have the same group name specified will be shown together in the crafting helper. The intention is to keep similar items within the same category, such as all boats:
+A recipe can optionally have a recipe group it belongs to within the recipe helper interface, specified by the `group` string. The value of this string can be anything. Any recipes that have the same group name specified will be shown together in the recipe helper. The intention is to keep similar items within the same category, such as all boats:
 
 ![Recipe book group](http://skylinerw.com/images/recipes/recipe_group.png)
 
-The following recipes belong to a group called "stuff" and will be grouped together in the crafting helper interface:
+The following recipes belong to a group called "stuff" and will be grouped together in the recipe helper interface:
 
 ```json
 {
@@ -594,9 +627,134 @@ Which could look like the following in the crafting window:
 
 ![](http://skylinerw.com/images/recipes/recipe_ingredients_4.png)
 
+## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="smelting">Smelting</a>
+
+Smelting involves placing an item into a furnace to smelt into a different item. The recipe takes an [ingredient](#smelting-ingredient) to produce a singular [result](#results-smelting). An optional [experience reward](#smelting-experience) and [cook time](#smelting-cookingtime) may be defined.
+
+The following recipe will turn a piece of dirt into a diamond, providing an approximated 40% chance of 1 experience per item cooked and cooking each item in 20 ticks (1 second).
+
+```json
+{
+    "type": "smelting",
+    "ingredient": {
+        "item": "minecraft:dirt"
+    },
+    "result": "minecraft:diamond",
+    "experience": 0.4,
+    "cookingtime": 20
+}
+```
+
+### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="smelting-ingredient">Ingredient</a>
+
+A single required item **must** be specified via the `ingredient` [item element](#generic-item).
+
+The following will allow the player to smelt either dirt or grass into diamond, or anything from the "minecraft:wool" tag group.
+
+```json
+{
+    "type": "smelting",
+    "ingredient": [
+        {
+            "item": "minecraft:dirt"
+        },
+        {
+            "item": "minecraft:grass"
+        },
+        {
+            "tag": "minecraft:wool"
+        }
+    ],
+    "result": "minecraft:diamond"
+}
+```
+
+Or to simply select one item, you would define the item element as an object.
+
+```json
+{
+    "type": "smelting",
+    "ingredient": {
+        "item": "minecraft:dirt"
+    },
+    "result": "minecraft:diamond"
+}
+```
+
+### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="smelting-experience">Experience</a>
+
+**Note: a bug currently causes the modifier to be based on the item currently in the smelting slot rather than the output slot: [MC-125961](https://bugs.mojang.com/browse/MC-125961)**
+
+An optional `experience` float **modifies** rate that experience will be provided for smelting, being a value between 0.0 and 1.0 (with 1.0 signifying a 100% experience rate). When not specified, defaults to 0.0. The rate of experience provided will be based on `rate = modifier * items removed from furnace`, where "modifier" is the value from `experience`. If the result is not a whole number, there is a `rate - floor(rate)` chance that the experience given will be `ceil(rate)`, otherwise the experience given is `floor(rate)`.
+
+For example, if 27 items were removed from the furnace while `experience` set to 0.25, the resulting experience rate is `0.25 * 27 = 6.75`. As this is not a whole number, there is a 75% chance (`6.75 - 6.0 = 0.75`) to round up and provide 7 experience points, otherwise it will simply be floored to 6 experience points.
+
+This can be represented logically as:
+
+```java
+float modifier = 0.25; // The specified "experience" value.
+int itemsRemoved = 27; // The number of items removed from the furnace output slot.
+int experienceProvided = itemsRemoved; // Experience provided is based on items removed.
+
+// If "experience" is specified as greater than 0 and less than 1...
+
+if (modifier > 0.0 && modifier < 1.0) {
+
+    float rate = modifier * itemsRemoved; // Result: 6.75
+    experienceProvided = floor(rate); // Result: 6.0
+
+    // If the rate is not whole (6.0 != 6.75), and with a 75% chance to continue...
+
+    if (experienceProvided != rate && Math.random() < rate - experienceProvided) {
+        
+        // Experience provided will instead be the floored rate plus one.
+        
+        experienceProvided = ceil(rate); // Result: 7.0
+    }
+}
+
+// Return experience, being one of the following depending on initial values: itemsRemoved, floor(rate), or ceil(rate).
+
+return experienceProvided;
+```
+
+As another example, if `experience` is set to 1.0 (100% experience rate) and 50 items were removed, then the player receives 50 experience points.
+
+As for a recipe example, where the rate modifier is set to 0.5 (i.e. the experience provided will be equal to roughly half of the number of items removed from the output slot of the furnace):
+
+```json
+{
+    "type": "smelting",
+    "ingredient": {
+        "item": "minecraft:dirt"
+    },
+    "result": "minecraft:diamond",
+    "experience": 0.5
+}
+```
+
+### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="smelting-cookingtime">Cooking time</a>
+
+The length of time (in ticks) that it takes to smelt an item can be specified with the `cookingtime` integer. When not specified, defaults to 200.
+
+The following will smelt an item in 10 ticks (0.5 seconds).
+
+```json
+{
+    "type": "smelting",
+    "ingredient": {
+        "item": "minecraft:stone"
+    },
+    "result": "minecraft:grass",
+    "cookingtime": 20
+}
+```
+
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="results">Results</a>
 
-A recipe **must** have the resulting item that is crafted, specified in the `result` [item element](#generic-item).
+### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="results-crafting">Crafting results</a>
+
+A crafting recipe **must** have a resulting item that is crafted, specified in the `result` [item element](#generic-item).
 
 For example, if the following shaped recipe is fulfilled, the player will receive a new anvil.
 
@@ -644,6 +802,22 @@ Unlike in `key` and `ingredients` item elements, the `count` key may be specifie
 ```
 
 ![](http://skylinerw.com/images/recipes/recipe_result_2.png)
+
+### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="results-smelting">Smelting results</a>
+
+A smelting recipe **must** have a resulting item, specified as an item ID in the `result` string.
+
+For example, if the following smelting recipe will provide glass when any block in the "minecraft:wool" tag group is smelted.
+
+```json
+{
+    "type": "smelting",
+    "ingredient": {
+        "tag": "minecraft:wool"
+    },
+    "result": "minecraft:glass"
+}
+```
 
 # Commands
 
