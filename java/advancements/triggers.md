@@ -53,7 +53,7 @@ There are 3 conditions for this trigger: `parent`, `partner`, and `child`.
 
 #### 1 & 2. "parent", "partner"
 
-Both the `parent` and `partner` [entity objects](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-entity) describe either of the parents. Both entities in the taming process could be the parent or the partner. For example, all of the following triggers checks if **either** parent is a cow.
+Both the `parent` and `partner` [entity objects](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity) describe either of the parents. Both entities in the taming process could be the parent or the partner. For example, all of the following triggers checks if **either** parent is a cow.
  
 ```json
 {
@@ -140,7 +140,7 @@ But if you wanted to check if a mule is being created, you'd look for a donkey a
 
 #### 3. "child", "partner"
 
-The `child` [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-entity) will match against the newborn animal. The following will trigger only if the child is a cow.
+The `child` [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity) will match against the newborn animal. The following will trigger only if the child is a cow.
 
 ```json
 {
@@ -294,7 +294,7 @@ There is 1 condition for this trigger: `level`.
 
 #### 1. "level"
 
-The `level` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) specifies the number of levels the beacon pyramid has, up to 4. For example, the following checks if the beacon pyramid has at least 2 levels when the player receives an effect update.
+The `level` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) specifies the number of levels the beacon pyramid has, up to 4. For example, the following checks if the beacon pyramid has at least 2 levels when the player receives an effect update.
 
 ```json
 {
@@ -344,7 +344,7 @@ There is 1 conditions for this trigger: `item`.
 
 #### 1. "item"
 
-The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-item) specifies item data about the item **before** it was consumed. For example, the following activates if the player had 2 golden apples in the stack and ate 1 of them.
+The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-item) specifies item data about the item **before** it was consumed. For example, the following activates if the player had 2 golden apples in the stack and ate 1 of them.
 
 ```json
 {
@@ -382,9 +382,9 @@ There are 2 conditions for this trigger: `zombie` and `villager`.
 
 #### 1. "zombie"
 
-The `zombie` [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-entity) specifies entity data about the zombie that was converted. The `type` string is essentially useless here as it will always be "minecraft:zombie_villager".
+The `zombie` [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity) specifies entity data about the zombie that was converted. The `type` string is essentially useless here as it will always be "minecraft:zombie_villager".
 
-The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) for the entity will be the zombie's location. That is, the value will describe the distance between the cured zombie and the player. The following checks if the player cured a zombie but was 50+ blocks away from it when the conversion was completed.
+The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) for the entity will be the zombie's location. That is, the value will describe the distance between the cured zombie and the player. The following checks if the player cured a zombie but was 50+ blocks away from it when the conversion was completed.
 
 ```json
 {
@@ -405,9 +405,9 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
 
 #### 2. "villager"
 
-The `villager` [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-entity) specifies entity data about the villager that was created as a result of converting. The `type` string is essentially useless here as it will always be "minecraft:villager".
+The `villager` [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity) specifies entity data about the villager that was created as a result of converting. The `type` string is essentially useless here as it will always be "minecraft:villager".
 
-The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) for the entity will be the villager's location. That is, the value will describe the distance between the new villager and the player. The following checks if the player cured a zombie but was 50+ blocks away from it when the conversion was completed.
+The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) for the entity will be the villager's location. That is, the value will describe the distance between the new villager and the player. The following checks if the player cured a zombie but was 50+ blocks away from it when the conversion was completed.
 
 ```json
 {
@@ -444,7 +444,7 @@ There is 1 condition for this trigger: `effects`.
 
 #### 1. "effects"
 
-A [status effects](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-effects) object that checks the player's whole list of effects whenever any effect is applied or lost. However, keep in mind that if the player lost an effect to trigger this advancement, it cannot be detected. The following checks if the player has Levitation.
+A [status effects](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-effects) object that checks the player's whole list of effects whenever any effect is applied or lost. However, keep in mind that if the player lost an effect to trigger this advancement, it cannot be detected. The following checks if the player has Levitation.
 
 ```json
 {
@@ -483,7 +483,7 @@ There are 2 conditions for this trigger: `item` and `levels`.
 
 #### 1. "item"
 
-The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-item) matches the enchanted item against the provided data. Note that this check occurs **after** enchanting, which means that you can make use of the `enchantments` list to only fulfill the trigger if a specific enchantment was received. The following will trigger if the item that was enchanted is a diamond pickaxe, and received any level of Fortune.
+The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-item) matches the enchanted item against the provided data. Note that this check occurs **after** enchanting, which means that you can make use of the `enchantments` list to only fulfill the trigger if a specific enchantment was received. The following will trigger if the item that was enchanted is a diamond pickaxe, and received any level of Fortune.
 
 ```json
 {
@@ -507,7 +507,7 @@ The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/ad
 
 #### 2. "levels"
 
-The `levels` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) specifies the number of levels spent to receive the enchantment. For example, with 15 bookshelves, selecting the third option requires 30 levels and **costs** 3 levels. This condition checks that cost of 3 levels. This does mean that you can't ensure the player had to have 30 levels from the advancement alone, but could use in-game command blocks to help detect that.
+The `levels` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) specifies the number of levels spent to receive the enchantment. For example, with 15 bookshelves, selecting the third option requires 30 levels and **costs** 3 levels. This condition checks that cost of 3 levels. This does mean that you can't ensure the player had to have 30 levels from the advancement alone, but could use in-game command blocks to help detect that.
 
 The following will trigger if the player spends 3 levels on an enchantment.
 
@@ -540,7 +540,7 @@ This triggers whenever the player's hitbox intersects with a block, **including 
 
 ### Conditions
 
-This trigger uses only the [block object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-block) to check various data.
+This trigger uses only the [block object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-block) to check various data.
 
 #### 1. shared block object
 
@@ -582,7 +582,7 @@ There is 1 condition for this trigger: `damage`.
 
 #### 1. "damage"
 
-A [damage object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-damage) that describes the damage the player has taken, complete with entity source that dealt the damage. For example, the following checks if the player had taken 10+ health damage from an explosion caused by a creeper.
+A [damage object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-damage) that describes the damage the player has taken, complete with entity source that dealt the damage. For example, the following checks if the player had taken 10+ health damage from an explosion caused by a creeper.
 
 ```json
 {
@@ -607,7 +607,7 @@ A [damage object](https://github.com/skylinerw/guides/blob/master/java/advanceme
 }
 ```
 
-The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) for the source entity will be the mob's location. That is, the value will describe the distance between the entity causing the damage and the player taking the damage. The following checks if the player had taken damage from a skeleton while being within 3 blocks of that skeleton.
+The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) for the source entity will be the mob's location. That is, the value will describe the distance between the entity causing the damage and the player taking the damage. The following checks if the player had taken damage from a skeleton while being within 3 blocks of that skeleton.
 
 ```json
 {
@@ -645,11 +645,11 @@ This triggers when any mob (**not** other players) kills the player.
 
 ### Conditions
 
-This trigger uses only the [death object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-death) to check various data.
+This trigger uses only the [death object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-death) to check various data.
 
 #### 1. "entity"
 
-Matches the mob that killed the player against the specified [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-entity). The following triggers if the player was killed by a creeper.
+Matches the mob that killed the player against the specified [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity). The following triggers if the player was killed by a creeper.
 
 ```json
 {
@@ -666,7 +666,7 @@ Matches the mob that killed the player against the specified [entity object](htt
 }
 ```
 
-The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) for the entity will be the mob's location. That is, the value will describe the distance between the player and the mob that killed them. The following checks if the player was killed by a skeleton while being within 3 blocks of it.
+The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) for the entity will be the mob's location. That is, the value will describe the distance between the player and the mob that killed them. The following checks if the player was killed by a skeleton while being within 3 blocks of it.
 
 ```json
 {
@@ -688,7 +688,7 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
 
 #### 2. "killing_blow"
 
-A [damage flags object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-damage-flags) checking various flags for the damage the player had dealt for the killing blow. The following triggers if the player is killed by a skeleton that didn't deal projectile damage.
+A [damage flags object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-damage-flags) checking various flags for the damage the player had dealt for the killing blow. The following triggers if the player is killed by a skeleton that didn't deal projectile damage.
 
 ```json
 {
@@ -758,7 +758,7 @@ There are 2 conditions for this trigger: `slots` and `items`.
 
 #### 1. "slots"
 
-The `slots` object contains generic information about all slots in the inventory. Within it are three possible [ranges](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) to specify: `occupied`, `full`, and `empty`. The armor and offhand slots are included in these checks.
+The `slots` object contains generic information about all slots in the inventory. Within it are three possible [ranges](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) to specify: `occupied`, `full`, and `empty`. The armor and offhand slots are included in these checks.
 
 The `occupied` range indicates the number of slots that have an item in it. The `full` range indicates the number of slots that have the highest number of items possible for that slot (such as 1 diamond pickaxe or 64 stone blocks). The `empty` range indicates the number of empty slots.
 
@@ -781,7 +781,7 @@ For example, the following will trigger when the player has exactly 10 empty slo
 
 #### 2. "items"
 
-The `items` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-item) list matches the player's inventory against each item provided in the list. The inventory **must** match all items specified. The following checks if the player has both stone and dirt in their inventory at the time their inventory gets updated.
+The `items` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-item) list matches the player's inventory against each item provided in the list. The inventory **must** match all items specified. The following checks if the player has both stone and dirt in their inventory at the time their inventory gets updated.
 
 ```json
 {
@@ -823,7 +823,7 @@ There are 3 conditions for this trigger: `item`, `durability`, and `delta`.
 
 #### 1. "item"
 
-The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-item) matches the damaged item with the data provided. This specifically checks the item **before** it was damaged, allowing you to check its durability and other data prior to durability loss. The following checks if the player used a diamond sword that had 1540 or more durability remaining before being damaged.
+The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-item) matches the damaged item with the data provided. This specifically checks the item **before** it was damaged, allowing you to check its durability and other data prior to durability loss. The following checks if the player used a diamond sword that had 1540 or more durability remaining before being damaged.
 
 ```json
 {
@@ -845,7 +845,7 @@ The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/ad
 
 #### 2. "durability"
 
-The `durability` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) checks the item's remaining durability **after** the item was damaged. The following checks if a shield had at most 10 durability remaining after being damaged.
+The `durability` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) checks the item's remaining durability **after** the item was damaged. The following checks if a shield had at most 10 durability remaining after being damaged.
 
 ```json
 {
@@ -864,7 +864,7 @@ The `durability` [range](https://github.com/skylinerw/guides/blob/master/java/ad
 
 #### 3. "delta"
 
-The `delta` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) checks the change in durability of the item. For example, the following checks if the item had a change of -2 durability or more (took 2+ points of damage).
+The `delta` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) checks the change in durability of the item. For example, the following checks if the item had a change of -2 durability or more (took 2+ points of damage).
 
 ```json
 {
@@ -901,7 +901,7 @@ There are 2 conditions for this trigger: `duration` and `distance`.
 
 #### 1. "duration"
 
-The `duration` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) checks how the number of ticks the player has been levitating (not how long the effect itself was set to last). Note that this internal timer will not reset until the Levitation effect is removed, thus revoking the advancement after it was achieved will simply cause it to be achieved immediately after if the player is still under the Levitation effect. The following triggers when the player has been under the Levitation effect for 40 or more ticks.
+The `duration` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) checks how the number of ticks the player has been levitating (not how long the effect itself was set to last). Note that this internal timer will not reset until the Levitation effect is removed, thus revoking the advancement after it was achieved will simply cause it to be achieved immediately after if the player is still under the Levitation effect. The following triggers when the player has been under the Levitation effect for 40 or more ticks.
 
 ```json
 {
@@ -920,7 +920,7 @@ The `duration` [range](https://github.com/skylinerw/guides/blob/master/java/adva
 
 #### 2. "distance"
 
-The `distance` [distance object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-distance) checks how the number of blocks away the player has traveled from the moment they received the effect. The following checks if the player has is still within 10 blocks (regardless of direction) of where they received the effect.
+The `distance` [distance object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-distance) checks how the number of blocks away the player has traveled from the moment they received the effect. The following checks if the player has is still within 10 blocks (regardless of direction) of where they received the effect.
 
 ```json
 {
@@ -955,7 +955,7 @@ This triggers every second (every 20 ticks) at all times, essentially requiring 
 
 ### Conditions
 
-This trigger uses only the [location object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-location) to check various data. The origin of the location is the player's coordinates.
+This trigger uses only the [location object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-location) to check various data. The origin of the location is the player's coordinates.
 
 #### 1. "position"
 
@@ -1021,11 +1021,11 @@ This triggers when the player travels to the Nether and then returns to the Over
 There are 3 conditions for this trigger: `entered`, `exited`, and `distance`.
 
 
-This trigger uses only the [location object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-location) to check various data. The origin of the location is the player's coordinates.
+This trigger uses only the [location object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-location) to check various data. The origin of the location is the player's coordinates.
 
 #### 1. "entered"
 
-A [location object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-location) checking the location of the nether portal that the player entered the nether through. The following checks if that nether portal was in a desert biome.
+A [location object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-location) checking the location of the nether portal that the player entered the nether through. The following checks if that nether portal was in a desert biome.
 
 ```json
 {
@@ -1044,7 +1044,7 @@ A [location object](https://github.com/skylinerw/guides/blob/master/java/advance
 
 #### 2. "exited"
 
-A [location object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-location) checking the location of the nether portal that the player arrived to in the overworld after leaving the nether through a portal. The following checks if that nether portal was in the positive X and Z coordinates.
+A [location object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-location) checking the location of the nether portal that the player arrived to in the overworld after leaving the nether through a portal. The following checks if that nether portal was in the positive X and Z coordinates.
 
 ```json
 {
@@ -1070,7 +1070,7 @@ A [location object](https://github.com/skylinerw/guides/blob/master/java/advance
 
 #### 3. "distance"
 
-A [distance object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-distance) checking the distance between the two nether portals positioned in the overworld. The following checks if they are horizontally 500 blocks apart.
+A [distance object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-distance) checking the distance between the two nether portals positioned in the overworld. The following checks if they are horizontally 500 blocks apart.
 
 ```json
 {
@@ -1105,7 +1105,7 @@ This triggers whenever the player places a block from their inventory.
 
 ### Conditions
 
-This trigger makes use of the [shared block object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-block), and has 2 extra conditions for this trigger: `location` and `item`.
+This trigger makes use of the [shared block object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-block), and has 2 extra conditions for this trigger: `location` and `item`.
 
 #### 1. shared block object
 
@@ -1129,7 +1129,7 @@ The block to be checked. The following checks if the player placed down smooth a
 
 #### 2. "item"
 
-An [item object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-item) that checks information concerning the corresponding item that the player used to place the block, **before** the item was consumed. The following checks if the player placed an unpowered repeater block (where the corresponding item is "minecraft:repeater") that was the last item in the stack at the time of placing.
+An [item object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-item) that checks information concerning the corresponding item that the player used to place the block, **before** the item was consumed. The following checks if the player placed an unpowered repeater block (where the corresponding item is "minecraft:repeater") that was the last item in the stack at the time of placing.
 
 ```json
 {
@@ -1150,7 +1150,7 @@ An [item object](https://github.com/skylinerw/guides/blob/master/java/advancemen
 
 #### 3. "location"
 
-A [location object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-location) that checks various location data about where the block was placed. For example, the following checks if glass block was placed anywhere at Y128 or higher.
+A [location object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-location) that checks various location data about where the block was placed. For example, the following checks if glass block was placed anywhere at Y128 or higher.
 
 ```json
 {
@@ -1192,7 +1192,7 @@ There are 2 conditions for this trigger: `damage` and `entity`.
 
 #### 1. "damage"
 
-A [damage object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-damage) that describes the damage the entity had taken by the player, complete with entity source to check information about the player. The `type` string in that case is essentially useless because it will always be "minecraft:player". The following checks if the player dealt at least 10.0 raw projectile damage before damage reduction from the entity's gear, allowing for only up to 10% damage reduction.
+A [damage object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-damage) that describes the damage the entity had taken by the player, complete with entity source to check information about the player. The `type` string in that case is essentially useless because it will always be "minecraft:player". The following checks if the player dealt at least 10.0 raw projectile damage before damage reduction from the entity's gear, allowing for only up to 10% damage reduction.
 
 ```json
 {
@@ -1217,7 +1217,7 @@ A [damage object](https://github.com/skylinerw/guides/blob/master/java/advanceme
 }
 ```
 
-The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) for the source entity will be the player's location. That is, the value will describe the distance between the player and.. the player. This renders the option essentially useless. For example, the following checks if the player was within 3 blocks of themselves after damaging an entity, which is always true.
+The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) for the source entity will be the player's location. That is, the value will describe the distance between the player and.. the player. This renders the option essentially useless. For example, the following checks if the player was within 3 blocks of themselves after damaging an entity, which is always true.
 
 ```json
 {
@@ -1240,7 +1240,7 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
 
 #### 2. "entity"
 
-An [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-entity) that checks information concerning the entity that the player had damaged. The following checks if the player dealt projectile damage to a zombie.
+An [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity) that checks information concerning the entity that the player had damaged. The following checks if the player dealt projectile damage to a zombie.
 
 ```json
 {
@@ -1262,7 +1262,7 @@ An [entity object](https://github.com/skylinerw/guides/blob/master/java/advancem
 }
 ```
 
-The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) for this entity will be the entity's location. That is, the value will describe the distance between the entity taking the damage and the player dealing the damage. The following correctly checks if the player was within 3 blocks of the entity they damaged.
+The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) for this entity will be the entity's location. That is, the value will describe the distance between the entity taking the damage and the player dealing the damage. The following correctly checks if the player was within 3 blocks of the entity they damaged.
 
 ```json
 {
@@ -1297,11 +1297,11 @@ This triggers when the player kills any entity extending the "Living" class (onl
 
 ### Conditions
 
-This trigger uses only the [death object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-death) to check various data.
+This trigger uses only the [death object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-death) to check various data.
 
 #### 1. "entity"
 
-Matches the entity killed against the specified [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-entity). The following triggers if the player kills a cow.
+Matches the entity killed against the specified [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity). The following triggers if the player kills a cow.
 
 ```json
 {
@@ -1318,7 +1318,7 @@ Matches the entity killed against the specified [entity object](https://github.c
 }
 ```
 
-The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) for the entity will be the mob's location. That is, the value will describe the distance between the entity that died and the player that killed it. The following checks if the player had killed a skeleton with a projectile while being 50+ blocks away from it.
+The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) for the entity will be the mob's location. That is, the value will describe the distance between the entity that died and the player that killed it. The following checks if the player had killed a skeleton with a projectile while being 50+ blocks away from it.
 
 ```json
 {
@@ -1343,7 +1343,7 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
 
 #### 2. "killing_blow"
 
-A [damage flags object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-damage-flags) checking various flags for the damage the player had dealt for the killing blow. The following triggers if the player kills a creeper **without** projectile damage.
+A [damage flags object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-damage-flags) checking various flags for the damage the player had dealt for the killing blow. The following triggers if the player kills a creeper **without** projectile damage.
 
 ```json
 {
@@ -1402,7 +1402,7 @@ This triggers when the player successfully enters a bed (the player does not hav
 
 ### Conditions
 
-This trigger uses only the [location object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-location) to check various data. The origin of the location is the player's coordinates **after** getting in the bed, which would be just above the bed's head.
+This trigger uses only the [location object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-location) to check various data. The origin of the location is the player's coordinates **after** getting in the bed, which would be just above the bed's head.
 
 #### 1. "position"
 
@@ -1462,7 +1462,7 @@ There is 1 condition for this trigger: `entity`.
 
 #### 1. "entity"
 
-Matches the entity summoned against the specified [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-entity). The following triggers if the player resummons the ender dragon.
+Matches the entity summoned against the specified [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity). The following triggers if the player resummons the ender dragon.
 
 ```json
 {
@@ -1479,7 +1479,7 @@ Matches the entity summoned against the specified [entity object](https://github
 }
 ```
 
-The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) for the entity will be the summoned mob's location. That is, the value will describe the distance between the entity that was summoned and the player that summoned it, or between the ender dragon and all elligible players. The following checks if the player is within 10 blocks of the ender dragon when the summoning ritual is complete, which would be very high in the air.
+The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) for the entity will be the summoned mob's location. That is, the value will describe the distance between the entity that was summoned and the player that summoned it, or between the ender dragon and all elligible players. The following checks if the player is within 10 blocks of the ender dragon when the summoning ritual is complete, which would be very high in the air.
 
 ```json
 {
@@ -1519,7 +1519,7 @@ There is 1 condition for this trigger: `entity`.
 
 #### 1. "entity"
 
-The `entity` [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-entity) specifies the entity that the player tamed. The following checks if the player tamed a wolf.
+The `entity` [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity) specifies the entity that the player tamed. The following checks if the player tamed a wolf.
 
 ```json
 {
@@ -1577,7 +1577,7 @@ There is 1 condition for this trigger: `distance`.
 
 #### 1. "distance"
 
-The `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) specifies the number of blocks away the player (not the Eye of Ender) is to the nearest stronghold's center. It only takes into consideration the X and Z coordinate, ignoring the Y coordinate.
+The `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) specifies the number of blocks away the player (not the Eye of Ender) is to the nearest stronghold's center. It only takes into consideration the X and Z coordinate, ignoring the Y coordinate.
 
 The formula for determining the number of blocks is:
 
@@ -1628,7 +1628,7 @@ There is 1 condition for this trigger: `item`.
 
 #### 1. "item"
 
-The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-item) specifies item data about the item **before** it was consumed. For example, the following activates if the player had 5 totems of undying in the stack before one was consumed to save them.
+The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-item) specifies item data about the item **before** it was consumed. For example, the following activates if the player had 5 totems of undying in the stack before one was consumed to save them.
 
 ```json
 {
@@ -1665,9 +1665,9 @@ There are 2 conditions for this trigger: `villager` and `item`.
 
 #### 1. "villager"
 
-The `villager` [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-entity) describes information about the villager that was traded with. In this case, the `type` string is useless as it will always be "minecraft:villager".
+The `villager` [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity) describes information about the villager that was traded with. In this case, the `type` string is useless as it will always be "minecraft:villager".
 
-The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-range) for the entity will be the villager's location. That is, the value will describe the distance between the villager being traded with and the player that traded with it. The following checks if the player is within 1 block of the villager when completing a trade.
+The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) for the entity will be the villager's location. That is, the value will describe the distance between the villager being traded with and the player that traded with it. The following checks if the player is within 1 block of the villager when completing a trade.
 
 ```json
 {
@@ -1688,7 +1688,7 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
 
 #### 2. "item"
 
-The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements.md#generic-item) describes information about the item that was **purchased**. In terms of the count, keep in mind that this only accounts for one trade. If a villager was selling 2 sugar per emerald, shift-clicking to receive 10 sugar would still only count as 2 sugar as far as the advancement goes, as the first completed trade of the bunch was for 2 sugar. The following checks if the purchased item was sugar.
+The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-item) describes information about the item that was **purchased**. In terms of the count, keep in mind that this only accounts for one trade. If a villager was selling 2 sugar per emerald, shift-clicking to receive 10 sugar would still only count as 2 sugar as far as the advancement goes, as the first completed trade of the bunch was for 2 sugar. The following checks if the purchased item was sugar.
 
 ```json
 {
