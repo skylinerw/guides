@@ -429,9 +429,9 @@ The following sets two placeholders in the pattern, being "#" and "^", while the
 {
     "type": "crafting_shaped",
     "pattern": [
-        "##",
+        "###",
         "^^^",
-        "##"
+        "###"
     ],
     "key": {
         "#": {
