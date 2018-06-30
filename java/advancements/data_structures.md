@@ -535,7 +535,7 @@ Checks the "explosion" flag for the incoming damage. This is true for: creepers,
 
 ```json
 "damage_object": {
-    "explosion": true
+    "is_explosion": true
 }
 ```
 
