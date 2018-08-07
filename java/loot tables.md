@@ -1205,7 +1205,7 @@ Same as `LootTableSeed`, except for mobs.
 An empty loot table may be declared by using `minecraft:empty`. This will prevent any default loot from generating, provided that this table has not been overwritten with a custom table.
 
 ```
-/summon Creeper ~ ~1 ~ {LootTable:"minecraft:empty"}
+/summon Creeper ~ ~1 ~ {DeathLootTable:"minecraft:empty"}
 ```
 
 # Conclusion
