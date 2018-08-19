@@ -787,13 +787,19 @@ The IDs for functions will have the resource namespace default to "minecraft" (e
 }
 ```
 
+### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) List of functions
+
+See [here](https://github.com/skylinerw/guides/blob/master/java/loot-tables/functions.md) for a list of functions.
+
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="conditions">Conditions</a>
 
-Conditions are a list of requirements that must be met before either a pool can be used, an individual item can be selected, or before a function can be run. All conditions are stored within the `conditions` list, with the `condition` string key stating which internal condition function is used. Conditions may be applied at the same depth as `items`, alongside each individual `item`, or within `functions`.
+Conditions are a list of requirements that must be met before either a pool can be used, an individual entry can be selected, or before a function can be run. All conditions are stored within the `conditions` list, with the `condition` string key stating which internal condition function is used. Conditions may be applied to a pool to prevent the pool itself from being used, applied to an individual entry to cause the entry to be ignored before rolling, or within [`functions`](#items-functions) to prevent a function from working.
 
 The IDs for conditions will have the resource namespace default to "minecraft" (e.g. `minecraft:random_chance`) when not specified. If using mods, the namespace will be whatever the mod has implemented. Note that you cannot create your own conditions without modding.
 
-Each condition runs one at a time. If any condition fails, the remainder in the same list will be ignored.
+Each condition runs one at a time. If any one condition in the list fails, the remainder in the same list will be ignored.
+
+**Pool conditions**
 
 The following only provides items within the pool if the condition is met. Both the stone and stick will only be provided when killed by a player, otherwise nothing is provided.
 
@@ -824,7 +830,9 @@ The following only provides items within the pool if the condition is met. Both 
 }
 ```
 
-The following only provides the individual item if the condition is met. The stone will always drop, but the stick will only drop when killed by a player. **If the conditions are not met when selecting an item, the entry will not be selected**. The pool will not re-roll and ignores the entry instead.
+**Entry conditions**
+
+The following only provides the individual entry if the condition is met. The stone will always drop, but the stick will only drop (at a 50% rate due to the weight) when killed by a player.
 
 ```json
 {
@@ -852,6 +860,44 @@ The following only provides the individual item if the condition is met. The sto
     ]
 }
 ```
+
+Conditions for all entries are tested *before* randomly picking an entry from a pool. If a condition for an entry fails, the entry will not be selected whatsoever by the pool. This means the weight can be affected unexpectedly, since entries that are thrown out due to conditions will no longer be contributing to the total weight.
+
+For example, with the following table, the stone and cactus will each have a 1% chance of dropping, while the stick has a 98% chance. The total weight, provided the condition for the stick succeeds, is 100. However, if the condition for the stick fails, the stone and cactus will each have a 50% chance of dropping instead. The total weight will instead be 2.
+
+```json
+{
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:stone",
+                    "weight": 1
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:cactus",
+                    "weight": 1
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:stick",
+                    "weight": 98,
+                    "conditions": [
+                        {
+                            "condition": "minecraft:killed_by_player"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+**Function conditions**
 
 The following will only run the individual function if a condition was met. The following will run the `furnace_smelt` function only if the mob was killed by a player. If a player kills the mob, smooth stone will drop. Otherwise, cobblestone will drop.
 
@@ -881,6 +927,10 @@ The following will only run the individual function if a condition was met. The 
     ]
 }
 ```
+
+### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) List of conditions
+
+See [here](https://github.com/skylinerw/guides/blob/master/java/loot-tables/conditions.md) for a list of conditions.
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="duplicates">Duplicate functions & conditions</a>
 
