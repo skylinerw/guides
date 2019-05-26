@@ -8,7 +8,7 @@ The following is a list of all possible conditions that can be used within loot 
 2. [`random_chance_with_looting`](#random_chance_with_looting)
 3. [`killed_by_player`](#killed_by_player)
 4. [`entity_properties`](#entity_properties)
-    1. [`on_fire`](#entity_properties-on_fire)
+    1. [`is_on_fire`](#entity_properties-is_on_fire)
 5. [`entity_scores`](#entity_scores)
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="random_chance">`random_chance`</a>
@@ -126,9 +126,7 @@ Provides an item/pool or executes a function if the target entity defined by the
 
 `entity` is restricted to: ["this"](https://github.com/skylinerw/guides/blob/master/java/loot%20tables.md#construct-this), ["killer"](https://github.com/skylinerw/guides/blob/master/java/loot%20tables.md#construct-damage), and ["killer_player"](https://github.com/skylinerw/guides/blob/master/java/loot%20tables.md#construct-player). Target selectors or exact names do **not** work.
 
-The IDs for properties will have the resource namespace default to "minecraft" (e.g. `minecraft:on_fire`) when not specified. If using mods, the namespace will be whatever the mod has implemented. Note that you cannot create your own properties without modding.
-
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="entity_properties-on_fire">`on_fire`</a>
+### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="entity_properties-is_on_fire">`is_on_fire`</a>
 
 The following will only provide a stick if the mob was killed while it was on fire.
 
@@ -146,8 +144,10 @@ The following will only provide a stick if the mob was killed while it was on fi
                         {
                             "condition": "minecraft:entity_properties",
                             "entity": "this",
-                            "properties": {
-                                "minecraft:on_fire": true
+                            "predicate": {
+                                "flags": {
+                                    "is_on_fire": true
+                                }
                             }
                         }
                     ]
@@ -174,8 +174,10 @@ The following will only provide cobblestone if the killing player was **not** on
                         {
                             "condition": "minecraft:entity_properties",
                             "entity": "killer_player",
-                            "properties": {
-                                "minecraft:on_fire": false
+                            "predicate": {
+                                "flags": {
+                                    "is_on_fire": false
+                                }
                             }
                         }
                     ]
