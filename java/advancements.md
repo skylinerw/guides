@@ -1,6 +1,6 @@
 # Advancements
 
-*Last updated: 18w03b*
+*Last updated: 1.14.3-pre4*
 
 ***
 
@@ -437,6 +437,8 @@ The custom criteria names are local to that file and cannot be referred to in ot
 ### <a name="criteria-order">Processing order of triggers</a>
 
 The following timeline describes the order in which specific triggers activate in each game tick. This can be useful when running a function as a [reward](#rewards). For example, if you needed to run commands before entities are processed (and after command blocks are processed), the "minecraft:tick" trigger will do so. If you needed to run commands after entities are processed, you would use the "gameLoopFunction" gamerule to run the necessary function.
+
+**This image is currently outdated; last updated 18w03b.**
 
 ![](http://i.imgur.com/meB4V6V.png)
 
