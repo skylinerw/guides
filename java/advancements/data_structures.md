@@ -89,21 +89,23 @@ The `biome` string specifies the name ID of the biome that the player must stand
 
 ### 3. `feature`
 
-The `feature` string specifies the name ID of a structure. The player must be standing within the bounding box of that structure to be detected. The following checks if the player is inside an "EndCity" structure.
+The `feature` string specifies the name ID of a structure. The player must be standing within the bounding box of that structure to be detected. Accepted values include: "pillager_outpost", "mineshaft", "mansion", "jungle_pyramid", "desert_pyramid", "igloo", "shipwreck", "swamp_hut", "stronghold", "monument", "ocean_ruin", "fortress", "endcity", "buried_treasure", "village".
+
+The following checks if the player is inside an "endcity" structure.
 
 ```json
 "location_object": {
-    "feature": "EndCity"
+    "feature": "endcity"
 }
 ```
 
 ### 4. `dimension`
 
-The `dimension` string specifies the name ID of a dimension to find the player in. Accepted values are "overworld", "the_nether", and "the_end". The following checks if the player is anywhere in the nether.
+The `dimension` string specifies the name ID of a dimension to find the player in. Accepted values are "minecraft:overworld", "minecraft:the_nether", and "minecraft:the_end". The following checks if the player is anywhere in the nether.
 
 ```json
 "location_object": {
-    "dimension": "the_nether"
+    "dimension": "minecraft:the_nether"
 }
 ```
 
@@ -394,6 +396,61 @@ The `nbt` string compares the raw NBT input to the entity's NBT data. This raw d
 }
 ```
 
+### 6. `flags`
+
+The `flags` object contains various boolean fields that further describe the entity. The following includes a list of all acceptable flags.
+
+```json
+"entity_object": {
+    "flags": {
+        "is_on_fire": false,
+        "is_sneaking": false,
+        "is_sprinting": false,
+        "is_swimming": false,
+        "is_baby": false
+    }
+}
+```
+
+### 7. `equipment`
+
+The `equipment` object contains nested objects that each make use of the [shared item object](#generic-item) to describe the armor and weapons that the entity is wearing.
+
+```json
+"entity_object": {
+    "equipment": {
+        "head": {
+            "item": "minecraft:stone"
+        },
+        "chest": {
+            "item": "minecraft:stone"
+        },
+        "legs": {
+            "item": "minecraft:stone"
+        },
+        "feet": {
+            "item": "minecraft:stone"
+        },
+        "mainhand": {
+            "item": "minecraft:stone"
+        },
+        "offhand": {
+            "item": "minecraft:stone"
+        }
+    }
+}
+```
+
+### 8. `catType`
+
+The `catType` string takes in a resource location pointing to the texture file of the corresponding cat type. For example, the following checks if the cat is a tabby.
+
+```json
+"entity_object": {
+    "catType": "minecraft:textures/entity/cat/tabby.png"
+}
+```
+
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="generic-block">Shared: block object</a>
 
 A block object contains a handful of data to compare to an incoming block. All options are available anywhere that this entity object is used.
@@ -569,7 +626,17 @@ Checks the "projectile" flag for the incoming damage. This is true for: arrows, 
 }
 ```
 
-### 8. `source_entity`
+### 8. `is_lightning`
+
+Checks the "lightning" flag for the incoming damage. This is true for: lightning bolts. The following checks if the incoming damage is specifically **not** from a lightning bolt.
+
+```json
+"damage": {
+    "is_lightning": false
+}
+```
+
+### 9. `source_entity`
 
 An [enity object](#generic-entity) that specifies the "owner" of the damage. For example, if the player was hit by an arrow shot by a skeleton, the skeleton would be the "source entity". The [damage object](#generic-damage) already makes use of this check, so it is pointless to specify a source entity twice. This particular check is still useful for triggers that only use a damage flags object rather than a damage object.
 
@@ -581,7 +648,7 @@ An [enity object](#generic-entity) that specifies the "owner" of the damage. For
 }
 ```
 
-### 9. `direct_entity`
+### 10. `direct_entity`
 
 An [enity object](#generic-entity) that specifies the direct cause of the damage. For example, if the player was hit by an arrow shot by a skeleton, the arrow would be the "direct entity". The following ensures the player was hit by an arrow shot by a skeleton.
 
