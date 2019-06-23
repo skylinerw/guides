@@ -7,6 +7,7 @@ Certain triggers make use of subcriteria, specified in the `conditions` object. 
 1. [`bred_animals`](#bred_animals)
 1. [`brewed_potion`](#brewed_potion)
 1. [`changed_dimension`](#changed_dimension)
+1. [`channeled_lightning`](#channeled_lightning)
 1. [`construct_beacon`](#construct_beacon)
 1. [`consume_item`](#consume_item)
 1. [`cured_zombie_villager`](#cured_zombie_villager)
@@ -15,9 +16,13 @@ Certain triggers make use of subcriteria, specified in the `conditions` object. 
 1. [`enter_block`](#enter_block)
 1. [`entity_hurt_player`](#entity_hurt_player)
 1. [`entity_killed_player`](#entity_killed_player)
+1. [`filled_bucket`](#filled_bucket)
+1. [`fishing_rod_hooked`](#fishing_rod_hooked)
+1. [`hero_of_the_village`](#hero_of_the_village)
 1. [`impossible`](#impossible)
 1. [`inventory_changed`](#inventory_changed)
 1. [`item_durability_changed`](#item_durability_changed)
+1. [`killed_by_crossbow`](#killed_by_crossbow)
 1. [`levitation`](#levitation)
 1. [`location`](#location)
 1. [`nether_travel`](#nether_travel)
@@ -25,6 +30,7 @@ Certain triggers make use of subcriteria, specified in the `conditions` object. 
 1. [`player_hurt_entity`](#player_hurt_entity)
 1. [`player_killed_entity`](#player_killed_entity)
 1. [`recipe_unlocked`](#recipe_unlocked)
+1. [`shot_crossbow`](#shot_crossbow)
 1. [`slept_in_bed`](#slept_in_bed)
 1. [`summoned_entity`](#summoned_entity)
 1. [`tame_animal`](#tame_animal)
@@ -32,6 +38,7 @@ Certain triggers make use of subcriteria, specified in the `conditions` object. 
 1. [`used_ender_eye`](#used_ender_eye)
 1. [`used_totem`](#used_totem)
 1. [`villager_trade`](#villager_trade)
+1. [`voluntary_exile`](#voluntary_exile)
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="bred_animals">`bred_animals`</a>
 
@@ -272,6 +279,89 @@ The `from` string specifies the dimension the player traveled from, accepting va
 }
 ```
 
+## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="channeled_lightning">`channeled_lightning`</a>
+
+This triggers when a lightning bolt summoned from the Channeling enchantment strikes an entity.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:channeled_lightning"
+        }
+    }
+}
+```
+
+### Conditions
+
+There is 1 condition for this trigger: `victims`.
+
+#### 1. "victims"
+
+The `victims` list contains [entity objects](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity) detailing the type of entities that must be struck in order for the advancement to be fulfilled.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:channeled_lightning",
+            "conditions": {
+                "victims": [
+                    {
+                        "type": "minecraft:creeper"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
+If multiple entities are specified, the lightning bolt must strike all of the specified entities. For example, the following will succeed if both a creeper and a zombie were struck by the same Channeled lightning bolt, but will fail if only one or the other were struck.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:channeled_lightning",
+            "conditions": {
+                "victims": [
+                    {
+                        "type": "minecraft:creeper"
+                    },
+                    {
+                        "type": "minecraft:zombie"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
+If the same entity is specified multiple times, then the lightning bolt must strike as many of that entity as is specified. For example, the following will only succeed if the lightning bolt struck 2 individual creepers.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:channeled_lightning",
+            "conditions": {
+                "victims": [
+                    {
+                        "type": "minecraft:creeper"
+                    },
+                    {
+                        "type": "minecraft:creeper"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="construct_beacon">`construct_beacon`</a>
 
 This triggers every time the player receives an effect update from a beacon, **not** when physically constructing a beacon pyramid. The beacon does not need to have any effects selected for this update to occur, but the player does need to be in range as usual. The beacon does **not** need to be placed on a valid pyramid structure!
@@ -394,7 +484,9 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
             "conditions": {
                 "zombie": {
                     "distance": {
-                        "min":50
+                        "absolute": {
+                            "min":50
+                        }
                     }
                 }
             }
@@ -417,7 +509,9 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
             "conditions": {
                 "villager": {
                     "distance": {
-                        "min":50
+                        "absolute": {
+                            "min":50
+                        }
                     }
                 }
             }
@@ -619,7 +713,9 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
                     "source_entity": {
                         "type": "minecraft:skeleton",
                         "distance": {
-                            "max": 3
+                            "absolute": {
+                                "max": 3
+                            }
                         }
                     }
                 }
@@ -677,7 +773,9 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
                 "entity": {
                     "type": "minecraft:skeleton",
                     "distance": {
-                        "max": 3
+                        "absolute": {
+                            "max": 3
+                        }
                     }
                 }
             }
@@ -702,6 +800,151 @@ A [damage flags object](https://github.com/skylinerw/guides/blob/master/java/adv
                 "killing_blow": {
                     "is_projectile": false
                 }
+            }
+        }
+    }
+}
+```
+
+## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="filled_bucket">`filled_bucket`</a>
+
+This triggers when the player fills a bucket item with water or lava, or picks up a fish entity with a bucket.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:filled_bucket"
+        }
+    }
+}
+```
+
+### Conditions
+
+There is 1 condition for this trigger: `item`.
+
+#### 1. "item"
+
+An [item object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-item) describing the bucket item after it was filled. For example, the following will only succeed if the bucket became a bucket of lava.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:filled_bucket",
+            "conditions": {
+                "item": {
+                    "item": "lava_bucket"
+                }
+            }
+        }
+    }
+}
+```
+
+## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="fishing_rod_hooked">`fishing_rod_hooked`</a>
+
+This triggers when the player reels back a fishing rod, either when it was attached to another entity or when successfully fishing up an item.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:fishing_rod_hooked"
+        }
+    }
+}
+```
+
+### Conditions
+
+There are 3 conditions for this trigger: `rod`, `entity`, `item`.
+
+#### 1. "rod"
+
+An [item object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-item) describing the fishing rod item that was used by the player. For example, the following only succeeds if the fishing rod had a custom `test` byte tag with the value of 1.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:fishing_rod_hooked",
+            "conditions": {
+                "rod": {
+                    "nbt": "{test:1b}"
+                }
+            }
+        }
+    }
+}
+```
+
+#### 2. "entity"
+
+An [entity object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity) describing the entity that was hooked, if applicable. For example, the following only succeeds if the hooked entity was an armor stand.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:fishing_rod_hooked",
+            "conditions": {
+                "entity": {
+                    "type": "armor_stand"
+                }
+            }
+        }
+    }
+}
+```
+
+#### 3. "item"
+
+An [item object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-item) describing the item that was fished up from regular fishing in water, if applicable. For example, the following only succeeds if the player fished up a cod item.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:fishing_rod_hooked",
+            "conditions": {
+                "item": {
+                    "item": "cod"
+                }
+            }
+        }
+    }
+}
+```
+
+## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="hero_of_the_village">`hero_of_the_village`</a>
+
+This triggers when a pillager raid that the player participated in (by killing a member of the raid) was vanquished.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:hero_of_the_village"
+        }
+    }
+}
+```
+
+### Conditions
+
+This trigger uses only the [location object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-location) to check various data. The origin of the location is the player's coordinates.
+
+For example, the following only succeeds if the player was in a desert biome when the raid was vanquished.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:hero_of_the_village",
+            "conditions": {
+                "biome": "minecraft:desert"
             }
         }
     }
@@ -880,6 +1123,114 @@ The `delta` [range](https://github.com/skylinerw/guides/blob/master/java/advance
     }
 }
 ```
+
+## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="killed_by_crossbow">`killed_by_crossbow`</a>
+
+This triggers whenever the player kills a mob with a projectile shot from a crossbow.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:killed_by_crossbow"
+        }
+    }
+}
+```
+
+### Conditions
+
+There are 2 conditions for this trigger: `victims`, and `unique_entity_types`.
+
+#### 1. "victims"
+
+The `victims` list contains [entity objects](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-entity) detailing the type of entities that must be killed by a single projectile (requiring a Piercing enchantment). For example, the following only succeeds if the player killed a creeper with a crossbow.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:killed_by_crossbow",
+            "conditions": {
+                "victims": [
+                    {
+                        "type": "minecraft:creeper"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
+If multiple entities are specified, the projectile must kill all of the specified entities. For example, the following will succeed if both a creeper and a zombie were killed by the same crossbow projectile, but will fail if only one or the other were struck.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:killed_by_crossbow",
+            "conditions": {
+                "victims": [
+                    {
+                        "type": "minecraft:creeper"
+                    },
+                    {
+                        "type": "minecraft:zombie"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
+If the same entity is specified multiple times, then the projectile must kill as many of that entity as is specified. For example, the following will only succeed if the projectile killed 2 individual creepers.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:killed_by_crossbow",
+            "conditions": {
+                "victims": [
+                    {
+                        "type": "minecraft:creeper"
+                    },
+                    {
+                        "type": "minecraft:creeper"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
+#### 2. "unique_entity_types"
+
+A [range](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-range) that effectively states the minimum number of unique entity types (determined by their ID, e.g. `minecraft:creeper`) that must be killed by a single projectile shot from a crossbow (which will need the Piercing enchantment to do so).
+
+Due to the way in which this trigger activates (being each time a piercing projectile encounters and entity), the value of `unique_entity_types` cannot describe a maximum, only a minimum. This currently makes the use of `min` and `max` pointless, as any value is essentially a minimum.
+
+For example, the following requires at least 2 different entity types be killed. If 2 creepers are killed, the trigger will fail. If a creeper and a zombie are killed, the trigger will succeed.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:killed_by_crossbow",
+            "conditions": {
+                "unique_entity_types": 2
+            }
+        }
+    }
+}
+```
+
+
+
+
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="levitation">`levitation`</a>
 
@@ -1228,7 +1579,9 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
                 "damage": {
                     "source_entity": {
                         "distance": {
-                            "max": 3
+                            "absolute": {
+                                "max": 3
+                            }
                         }
                     }
                 }
@@ -1272,7 +1625,9 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
             "conditions": {
                 "entity": {
                     "distance": {
-                        "max": 3
+                        "absolute": {
+                            "max": 3
+                        }
                     }
                 }
             }
@@ -1329,7 +1684,9 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
                 "entity": {
                     "type": "minecraft:skeleton",
                     "distance": {
-                        "min": 50
+                        "absolute": {
+                            "min":50
+                        }
                     }
                 },
                 "killing_blow": {
@@ -1385,6 +1742,43 @@ The following will trigger when the player unlocks the "minecraft:redstone" reci
 ### Conditions
 
 There are 0 optional conditions for this trigger.
+
+## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="shot_crossbow">`shot_crossbow`</a>
+
+This triggers whenever the player is under the Levitation potion effect.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:shot_crossbow"
+        }
+    }
+}
+```
+
+### Conditions
+
+There is 1 condition for this trigger: `item`.
+
+#### 1. "item"
+
+An [item object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-item) describing the crossbow itself **before** the projectile was removed from the crossbow. For example, the following checks if the crossbow had shot a firework.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:shot_crossbow",
+            "conditions": {
+                "item": {
+                    "nbt": "{ChargedProjectiles:[{id:\"minecraft:firework_rocket\"}]}"
+                }
+            }
+        }
+    }
+}
+```
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="slept_in_bed">`slept_in_bed`</a>
 
@@ -1490,7 +1884,9 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
                 "entity": {
                     "type": "minecraft:ender_dragon",
                     "distance": {
-                        "max": 10
+                        "absolute": {
+                            "max": 10
+                        }
                     }
                 }
             }
@@ -1600,7 +1996,9 @@ And the following will trigger if the player is standing at (40, 64, 10) with th
             "trigger": "minecraft:used_ender_eye",
             "conditions": {
                 "distance": {
-                    "max": 398
+                    "absolute": {
+                        "max": 398
+                    }
                 }
             }
         }
@@ -1677,7 +2075,9 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
             "conditions": {
                 "villager": {
                     "distance": {
-                        "max": 1
+                        "absolute": {
+                            "max": 1
+                        }
                     }
                 }
             }
@@ -1699,6 +2099,39 @@ The `item` [item object](https://github.com/skylinerw/guides/blob/master/java/ad
                 "item": {
                     "item": "minecraft:sugar"
                 }
+            }
+        }
+    }
+}
+```
+
+## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="voluntary_exile">`voluntary_exile`</a>
+
+This triggers when the player causes a raid to begin.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:voluntary_exile"
+        }
+    }
+}
+```
+
+### Conditions
+
+This trigger uses only the [location object](https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#generic-location) to check various data. The origin of the location is the player's coordinates.
+
+For example, the following only succeeds if the player was in a desert biome when the raid began.
+
+```json
+{
+    "criteria": {
+        "custom_test_name": {
+            "trigger": "minecraft:voluntary_exile",
+            "conditions": {
+                "biome": "minecraft:desert"
             }
         }
     }
