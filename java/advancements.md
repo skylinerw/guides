@@ -687,7 +687,14 @@ The `icon` object holds a required item ID of the item. This icon is shown in th
 }
 ```
 
-Currently you may not specify any NBT data for the item, including durability.
+NBT data can be specified with the `nbt` string.
+
+```json
+"icon": {
+    "item": "minecraft:red_wool",
+    "nbt": "{test:1b}"
+}
+```
 
 ### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-background">Background</a>
 
