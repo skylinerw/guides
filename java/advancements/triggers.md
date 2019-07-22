@@ -1745,7 +1745,7 @@ There are 0 optional conditions for this trigger.
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="shot_crossbow">`shot_crossbow`</a>
 
-This triggers whenever the player is under the Levitation potion effect.
+This triggers whenever the player fires a crossbow.
 
 ```json
 {
