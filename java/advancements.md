@@ -907,7 +907,7 @@ This number (**not** range) specifies the amount of experience (**not** levels) 
 
 ### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="rewards-function">`function`</a>
 
-This string specifies a single function file to run, with the value being the resource location to that function. The player will be considered the command sender and CommandStats trigger target, which means sender bias (such as from "@s") will always target that player, and that player will trigger their own stored CommandStats. Each command will run in the specified order in the function. If the advancement is granted via command block, all of the listed commands will execute immediately, allowing other command blocks further in the chain to run based off of the results of the advancement's function being run (although you do not need to use advancements for this if focusing on functions).
+This string specifies a single function file to run, with the value being the resource location to that function. The player will be considered the command sender and as such can be targeted with `@s` in the commands in the function. Each command will run in the specified order in the function. If the advancement is granted via command block, all of the listed commands will execute immediately, allowing other command blocks further in the chain to run based off of the results of the advancement's function being run (although you do not need to use advancements for this if focusing on functions).
 
 ```json
 {
