@@ -553,6 +553,7 @@ The following is a list of all possible clickEvents that can be used.
 3. [`run_command`](#run_command)
 4. [`suggest_command`](#suggest_command)
 5. [`change_page`](#change_page)
+6. [`copy_to_clipboard`](#copy_to_clipboard)
 
 ##### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="open_url">`open_url`</a> ![](http://www.skylinerw.com/images/json/icons/tellraw.png)![](http://www.skylinerw.com/images/json/icons/book.png)
 
@@ -606,6 +607,14 @@ Used with books to switch to the page specified in `value`. If page number does 
 
 ```
 /give @p minecraft:written_book 1 0 {title:"",author:"",pages:["{\"text\":\"Go to Page 2\",\"clickEvent\":{\"action\":\"change_page\",\"value\":\"2\"}}","[\"Page 2\"]","[\"Page 3\"]"]}
+```
+
+##### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="copy_to_clipboard">`copy_to_clipboard`</a> ![](http://www.skylinerw.com/images/json/icons/book.png)
+
+When the player clicks the text the `value` will be copied to their clipboard.
+
+```
+/tellraw @a {"text":"click to copy","clickEvent":{"action":"copy_to_clipboard","value":"copied this"}}
 ```
 
 #### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="listeners-hoverevent">`hoverEvent`</a> ![](http://www.skylinerw.com/images/json/icons/tellraw.png)![](http://www.skylinerw.com/images/json/icons/book.png)
