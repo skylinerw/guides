@@ -522,7 +522,11 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="effects_changed">`effects_changed`</a>
 
-This triggers whenever the player receives or loses an effect.
+This triggers whenever the player receives or loses an effect. This will also trigger each time any single active effect reaches `(duration - 1) % 600 == 0`.
+
+Thus if an effect is newly applied for 61 seconds, it will trigger `effects_changed` immediately due to it being newly applied, and then 19 ticks later (`(1220 - 1) % 600 = 19`). Applying an effect with a duration of 61 seconds will cause it to apply immediately due to it being newly applied, but it will be 599 ticks until it triggers `effects_changed` again (`(1200 - 1) % 600 = 599`).
+
+If two effects were applied, one for 61 seconds and one for 62 seconds, they will both immediately trigger `effects_changed` due to being newly applied, and then the advancement will be triggered two more times: 19 ticks and 39 ticks after application.
 
 ```json
 {
