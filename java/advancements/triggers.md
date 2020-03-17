@@ -1642,7 +1642,7 @@ The origin for the `distance` [range](https://github.com/skylinerw/guides/blob/m
 
 ## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="player_killed_entity">`player_killed_entity`</a>
 
-This triggers when the player kills any living entity. This includes mobs, armor stands, and other players, as well as indirect kills for those entities (such as the player killing another player with an arrow).
+This triggers when the player kills any living entity. This includes mobs and other players, but excluding armor stands, as well as indirect kills for those entities (such as the player killing another player with an arrow).
 
 ```json
 {
