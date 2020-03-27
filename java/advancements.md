@@ -65,7 +65,7 @@ Starting in 1.12, achievements, now referred to as "advancements", have become d
 
 Advancements have a multitude of options, ranging from triggers based on the player's inventory to what biome they're in. Rewards can optionally be given, such as unlocking a recipe, providing an item, or providing experience. A new command, `/advancement`, has been introduced to supplement the files.
 
-Advancements use the [JSON format](http://json.org) to store the advancement information in external files.
+Advancements use the [JSON format](https://json.org) to store the advancement information in external files.
 
 ## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="errors">Errors</a>
 
@@ -75,17 +75,17 @@ When an advancement fails for whatever reason, you can find failure messages in 
 
 To open the Game Output window when launching the game, you must enable it in the "Settings" tab of the launcher.
 
-![](http://skylinerw.com/images/advancements/errors_output_1.png)
+![](https://www.skylinerw.com/images/advancements/errors_output_1.png)
 
 This window will show the error and stacktrace explaining the issue.
 
-![](http://skylinerw.com/images/advancements/errors_output_2.png)
+![](https://www.skylinerw.com/images/advancements/errors_output_2.png)
 
 ### Log files
 
 If you no longer have the Game Output window open, you can check the output log. You can quickly access the Minecraft program files in the launcher by navigating to **Launch Options -> + Add New**, and clicking the "Go to folder" button:
 
-![](http://skylinerw.com/images/advancements/errors_output_3.png)
+![](https://www.skylinerw.com/images/advancements/errors_output_3.png)
 
 From there, navigate to the `/logs/latest.log` file, which will contain the stacktrace. In this case, the error is stating that the advancement has a display, but is missing a description:
 
@@ -102,7 +102,7 @@ com.google.gson.JsonSyntaxException: Missing description
 
 Advancements are saved as a datapack in the world folder to be distributed with the world itself, inside the `/datapacks/` folder. Here is an example structure within the world folder, where "New World" is the name of the world folder:
 
-![](http://skylinerw.com/images/advancements/files_2.png)
+![](https://www.skylinerw.com/images/advancements/files_2.png)
 
 For more information on setting up a data pack (including the creation of the required `pack.meta` file), see [here](https://minecraft.gamepedia.com/Data_pack).
 
@@ -183,7 +183,7 @@ Windows Notepad is capable of saving as UTF-8, though will default to ANSI. Inst
 
 Image example:
 
-![](http://skylinerw.com/images/advancements/editing_1.png)
+![](https://www.skylinerw.com/images/advancements/editing_1.png)
 
 ### Notepad++
 
@@ -197,7 +197,7 @@ Image example:
 
 Image example:
 
-![](http://skylinerw.com/images/advancements/editing_2.png)
+![](https://www.skylinerw.com/images/advancements/editing_2.png)
 
 ### Atom
 
@@ -211,7 +211,7 @@ Image example:
 
 Image example:
 
-![](http://skylinerw.com/images/advancements/editing_3.png)
+![](https://www.skylinerw.com/images/advancements/editing_3.png)
 
 # Data structures
 
@@ -440,7 +440,7 @@ The following timeline describes the order in which specific triggers activate i
 
 **This image is currently outdated; last updated 18w03b.**
 
-![](http://i.imgur.com/meB4V6V.png)
+![](https://i.imgur.com/meB4V6V.png)
 
 ## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="requirements">Requirements</a>
 
@@ -585,7 +585,7 @@ Given the following advancement, which uses a simple string for the title:
 
 This will display as:
 
-![](http://skylinerw.com/images/advancements/display_1.png)
+![](https://www.skylinerw.com/images/advancements/display_1.png)
 
 Or you can specify formatting for the text using the text component (note that many text component features are unavailable, such as selectors, scores, and event listeners):
 
@@ -609,7 +609,7 @@ Or you can specify formatting for the text using the text component (note that m
 
 This will display as:
 
-![](http://skylinerw.com/images/advancements/display_4.png)
+![](https://www.skylinerw.com/images/advancements/display_4.png)
 
 #### 2. `description`
 
@@ -645,7 +645,7 @@ Given the following advancement, which uses a simple string for the description:
 
 This will display as:
 
-![](http://skylinerw.com/images/advancements/display_6.png)
+![](https://www.skylinerw.com/images/advancements/display_6.png)
 
 Or you can specify formatting for the text using the text component (note that many text component features are unavailable, such as selectors, scores, and event listeners):
 
@@ -677,7 +677,7 @@ Or you can specify formatting for the text using the text component (note that m
 
 This will display as:
 
-![](http://skylinerw.com/images/advancements/display_7.png)
+![](https://www.skylinerw.com/images/advancements/display_7.png)
 
 #### 3. `icon`
 
@@ -722,7 +722,7 @@ The `background` is an optional string for all advancements, but is only used by
 
 Image of the result:
 
-![](http://skylinerw.com/images/advancements/display_2.png)
+![](https://www.skylinerw.com/images/advancements/display_2.png)
 
 ### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-frame">Frame</a>
 
@@ -749,7 +749,7 @@ The following advancement makes use of the "challenge" frame.
 }
 ```
 
-![](http://skylinerw.com/images/advancements/display_3.png)
+![](https://www.skylinerw.com/images/advancements/display_3.png)
 
 The following advancement makes use of the "goal" frame.
 
@@ -772,7 +772,7 @@ The following advancement makes use of the "goal" frame.
 }
 ```
 
-![](http://skylinerw.com/images/advancements/display_5.png)
+![](https://www.skylinerw.com/images/advancements/display_5.png)
 
 ### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-toast">Show toast</a>
 
@@ -946,11 +946,11 @@ All rewards can be used at the same time.
 
 When an advancement has a [display](#display), it will be shown in the "Advancements" menu under a relevant tab. [Root](#tree-root) advancements will be the "owner" of a tab, with new tabs appearing for each unique root:
 
-![](http://skylinerw.com/images/advancements/tree_1.png)
+![](https://www.skylinerw.com/images/advancements/tree_1.png)
 
 Any advancements referring to the root will be its [children](#tree-branch) and are displayed in a branching tree:
 
-![](http://skylinerw.com/images/advancements/tree_2.png)
+![](https://www.skylinerw.com/images/advancements/tree_2.png)
 
 ### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="tree-root">Root</a>
 
@@ -1057,7 +1057,7 @@ For example, the following set of advancements defines a root and two branches, 
 
 Visual:
 
-![](http://skylinerw.com/images/advancements/tree_3.png)
+![](https://www.skylinerw.com/images/advancements/tree_3.png)
 
 Changing `/custom/branch_b.json` to the following will cause it to branch off of "custom:branch_a" rather than the root:
 
@@ -1081,11 +1081,11 @@ Changing `/custom/branch_b.json` to the following will cause it to branch off of
 
 Which would then show as a direct line of branches:
 
-![](http://skylinerw.com/images/advancements/tree_4.png)
+![](https://www.skylinerw.com/images/advancements/tree_4.png)
 
 Since you can have multiple branches per parent, complex trees can be created. The following image is a segment from the default "story" tab for vanilla Minecraft, showing complex connections between branches:
 
-![](http://skylinerw.com/images/advancements/tree_5.png)
+![](https://www.skylinerw.com/images/advancements/tree_5.png)
 
 # Commands
 
@@ -1101,8 +1101,8 @@ Since you can have multiple branches per parent, complex trees can be created. T
 
 ## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="external-links">External links</a>
 
-- [Generic JSON Validator](http://jsonlint.com)
-- [Minecraft Wiki: Advancements](http://minecraft.gamepedia.com/Advancements)
+- [Generic JSON Validator](https://jsonlint.com)
+- [Minecraft Wiki: Advancements](https://minecraft.gamepedia.com/Advancements)
 
 Translations:
 
