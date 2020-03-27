@@ -59,7 +59,7 @@
 
 # Generic info
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="intro">Intro</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="intro">Intro</a>
 
 Starting in 1.12, achievements, now referred to as "advancements", have become data-driven via modifiable JSON files rather than hard-coded. This allows map makers, modders, and server owners to modify and add advancements to their liking.
 
@@ -67,7 +67,7 @@ Advancements have a multitude of options, ranging from triggers based on the pla
 
 Advancements use the [JSON format](http://json.org) to store the advancement information in external files.
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="errors">Errors</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="errors">Errors</a>
 
 When an advancement fails for whatever reason, you can find failure messages in the Game Output window in the log files.
 
@@ -98,7 +98,7 @@ com.google.gson.JsonSyntaxException: Missing description
 
 # Files
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="files-location">File location</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="files-location">File location</a>
 
 Advancements are saved as a datapack in the world folder to be distributed with the world itself, inside the `/datapacks/` folder. Here is an example structure within the world folder, where "New World" is the name of the world folder:
 
@@ -114,7 +114,7 @@ From the image example above, `skylinerwadvancements`, `anothermod`, and `minecr
 
 The `minecraft` namespace in particular should **only** be used to overwrite default advancements, such as with the intent to prevent them from working. Place any new advancements in a new namespace and **not** within `minecraft`.
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="files-referencing">Referencing</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="files-referencing">Referencing</a>
 
 When referencing an advancement, whether it's from a [parent](#tree-root) or in a [command](#command-advancement), you must follow the following format **excluding the `.json` extension**:
 
@@ -134,7 +134,7 @@ By excluding the namespace, it will automatically assume it's meant to be `minec
 story/elytra = minecraft:story/elytra
 ```
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="default-advancements">Replacing default advancements</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="default-advancements">Replacing default advancements</a>
 
 You can create an advancement within the `minecraft` namespace with the same name as a default advancement. Anything that uses the default advancement will then use your custom one.
 
@@ -165,7 +165,7 @@ For example, given the filepath `/New World/datapacks/<datapack name>/minecraft/
 }
 ```
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="files-editing">Editing</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="files-editing">Editing</a>
 
 You will need to use a UTF-8 compliant text editor when creating and saving advancements that use unicode characters (such as the section symbol). By not encoding in UTF-8, special characters may not be saved correctly and Minecraft may fail to parse the data.
 
@@ -215,7 +215,7 @@ Image example:
 
 # Data structures
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="structure">Complete JSON structure</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="structure">Complete JSON structure</a>
 
 The following is a list of all possible keys for advancements.
 
@@ -391,7 +391,7 @@ The following is a list of all possible keys for advancements.
 
 # Customizing advancements
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="criteria">Criteria</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="criteria">Criteria</a>
 
 *[List of triggers](https://github.com/skylinerw/guides/blob/master/java/advancements/triggers.md)*
 
@@ -442,7 +442,7 @@ The following timeline describes the order in which specific triggers activate i
 
 ![](http://i.imgur.com/meB4V6V.png)
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="requirements">Requirements</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="requirements">Requirements</a>
 
 The `requirements` list specifies a [Conjunctive Normal Form](https://en.wikipedia.org/wiki/Conjunctive_normal_form) structure to accompany criteria. It essentially allows boolean logic to determine when the advancement is granted based on the accompanying criteria. The list contains more lists, which in turn contains strings that equal the names of the criteria. You would use this if you want to use an OR operation. Each new list is a new AND operation, while each comma-separated string within the list is an OR operation.
 
@@ -551,11 +551,11 @@ The advancement is granted if any of the criteria are met. Using logical operato
 "trigger_1" || "trigger_2" || "trigger_3"
 ```
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display">Display</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display">Display</a>
 
 The optional `display` object contains information about the display in the "Advancements" menu. If this object does not exist, the advancement will be hidden from the "Advancements" menu and popup notifications will not appear.
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-title-desc-icon">Title, description, & icon</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-title-desc-icon">Title, description, & icon</a>
 
 When the `display` object exists, the `title`, `description`, and `icon` tags **must** be specified. The background for the icon for each advancement will range from gray to red depending on the number of criteria fulfilled in that advancement.
 
@@ -698,7 +698,7 @@ NBT data can be specified with the `nbt` string.
 }
 ```
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-background">Background</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-background">Background</a>
 
 The `background` is an optional string for all advancements, but is only used by "root" advancements (i.e. when no [parent](#tree-branch) is defined). This is the background that appears behind all of the icons. The value is a resource location to any image within a resource pack. For example, the following advancement will display a tiled gold block background, coming from the default block texture:
 
@@ -724,7 +724,7 @@ Image of the result:
 
 ![](http://skylinerw.com/images/advancements/display_2.png)
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-frame">Frame</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-frame">Frame</a>
 
 An optional `frame` string modifies the border shape around the icon, accepting one of three possible values: "task", "challenge", and "goal". When not specified, it will default to "task".
 
@@ -774,7 +774,7 @@ The following advancement makes use of the "goal" frame.
 
 ![](http://skylinerw.com/images/advancements/display_5.png)
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-toast">Show toast</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-toast">Show toast</a>
 
 An optional `show_toast` boolean can be specified in order to prevent the popup notification in the upper right-hand corner of the screen from appearing when the player fulfills an advancement. It defaults to true, and setting it to false will hide the popup.
 
@@ -797,7 +797,7 @@ An optional `show_toast` boolean can be specified in order to prevent the popup 
 }
 ```
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-announce">Announce to chat</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-announce">Announce to chat</a>
 
 An optional `announce_to_chat` boolean can be specified in order to prevent a chat message from being sent telling all players that somebody fulfilled an advancement. It defaults to true, and setting it to false will prevent chat messages from being sent.
 
@@ -826,7 +826,7 @@ The `announceAdvancements` gamerule can globally disable fulfillment messages, o
 /gamerule announceAdvancements false
 ```
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-hidden">Hidden</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="display-hidden">Hidden</a>
 
 An optional `hidden` boolean can be specified in order to prevent child advancements from displaying in the "Advancements" menu until they are completed.
 
@@ -850,11 +850,11 @@ An optional `hidden` boolean can be specified in order to prevent child advancem
 }
 ```
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="rewards">Rewards</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="rewards">Rewards</a>
 
 The `rewards` object specifies multiple types of rewards to provide the player upon completing the advancement.
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="rewards-recipes">`recipes`</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="rewards-recipes">`recipes`</a>
 
 This list specifies multiple recipes to unlock for the player upon completing the advancement. The following advancement unlocks the "minecraft:redstone" and "minecraft:ladder" recipes together.
 
@@ -871,7 +871,7 @@ This list specifies multiple recipes to unlock for the player upon completing th
 }
 ```
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="rewards-loot">`loot`</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="rewards-loot">`loot`</a>
 
 This list specifies multiple loot tables to process, providing the player with the resulting item(s). The following advancement provides players with items from "minecraft:entities/creeper" and "minecraft:chests/simple_dungeon".
 
@@ -888,7 +888,7 @@ This list specifies multiple loot tables to process, providing the player with t
 }
 ```
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="rewards-experience">`experience`</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="rewards-experience">`experience`</a>
 
 This number (**not** range) specifies the amount of experience (**not** levels) to reward the player with.
 
@@ -905,7 +905,7 @@ This number (**not** range) specifies the amount of experience (**not** levels) 
 }
 ```
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="rewards-function">`function`</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="rewards-function">`function`</a>
 
 This string specifies a single function file to run, with the value being the resource location to that function. The player will be considered the command sender and as such can be targeted with `@s` in the commands in the function. Each command will run in the specified order in the function. If the advancement is granted via command block, all of the listed commands will execute immediately, allowing other command blocks further in the chain to run based off of the results of the advancement's function being run (although you do not need to use advancements for this if focusing on functions).
 
@@ -942,7 +942,7 @@ All rewards can be used at the same time.
 }
 ```
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="tree">Tree display</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="tree">Tree display</a>
 
 When an advancement has a [display](#display), it will be shown in the "Advancements" menu under a relevant tab. [Root](#tree-root) advancements will be the "owner" of a tab, with new tabs appearing for each unique root:
 
@@ -952,7 +952,7 @@ Any advancements referring to the root will be its [children](#tree-branch) and 
 
 ![](http://skylinerw.com/images/advancements/tree_2.png)
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="tree-root">Root</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="tree-root">Root</a>
 
 A root advancement will be one without a [parent](#tree-branch) defined. If a root has a display, it will be the left-most icon in the tree. If a root does not have a display, a tab in the "Advancements" menu will not be shown, effectively hiding all branches in the tree. The popup notification for branches **will** be displayed even in that case, allowing you to show the player custom notifications without having to have a tab in the "Advancements" menu.
 
@@ -990,7 +990,7 @@ While the following is an invisible root, as it has neither a display nor a pare
 }
 ```
 
-### [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="tree-branches">Branches</a>
+### [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="tree-branches">Branches</a>
 
 A branch is defined by having a `parent` string. The parent specifies the resource location of another advancement, where the branch visually extends from the parent. Note that the parent does **not** actually need to be completed in order for the branch to be completed.
 
@@ -1089,17 +1089,17 @@ Since you can have multiple branches per parent, complex trees can be created. T
 
 # Commands
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="command-advancement">Command: `/advancement`</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="command-advancement">Command: `/advancement`</a>
 
 *Coming soon...*
 
 # Conclusion
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="qa">Q&A</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="qa">Q&A</a>
 
 *Coming soon...*
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="external-links">External links</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="external-links">External links</a>
 
 - [Generic JSON Validator](http://jsonlint.com)
 - [Minecraft Wiki: Advancements](http://minecraft.gamepedia.com/Advancements)
@@ -1108,6 +1108,6 @@ Translations:
 
 - [Chinese](https://pca006132.neocities.org/tutorials/advancement/advancement.html)
 
-## [![Top](http://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="conclusion">Conclusion</a>
+## [![Top](https://www.skylinerw.com/images/json/icons/top.png)](#table-of-contents) <a name="conclusion">Conclusion</a>
 
 If there is information that needs to be added, corrected, or clarified, please create a new issue!
